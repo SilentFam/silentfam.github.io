@@ -432,14 +432,18 @@
       var target = parseFloat(final.replace(/[^0-9.]/g, "")) || 0;
       if(reduce || !target){ el.textContent = final; return; }
       var t0 = null, dur = 1100;
-      function step(ts){
-        if(!t0) t0 = ts;
+      function step(){
+        var ts = (window.performance && performance.now) ? performance.now() : Date.now();
+        if(t0 === null) t0 = ts;
         var k = Math.min(1, (ts - t0) / dur);
         var eased = 1 - Math.pow(1 - k, 3);
         paint(el, target * eased);
-        if(k < 1) requestAnimationFrame(step); else el.textContent = final;
+        if(k >= 1){ clearInterval(timer); el.textContent = final; }
       }
-      requestAnimationFrame(step);
+      /* requestAnimationFrame은 백그라운드 탭에서 멈춘다. 인터벌 + 안전 타이머로 항상 최종값에 도달시킨다. */
+      var timer = setInterval(step, 16);
+      step();
+      setTimeout(function(){ clearInterval(timer); el.textContent = final; }, dur + 400);
     }
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
