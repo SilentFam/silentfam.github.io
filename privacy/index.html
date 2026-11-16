@@ -166,8 +166,9 @@
   .rules .why{display:block; margin-top:9px; padding-left:11px; border-left:2px solid rgba(167,139,250,.45);
     font-style:normal; font-size:13.8px; color:var(--accent); opacity:.92}
   .journey{list-style:none; padding:0; margin:26px 0 0; display:grid; gap:0}
-  .journey li{display:grid; grid-template-columns:7.6rem 1fr; gap:18px; padding:20px 0; border-top:1px solid var(--line2)}
+  .journey li{display:grid; grid-template-columns:2rem 7.6rem 1fr; gap:16px; padding:20px 0; border-top:1px solid var(--line2)}
   .journey li:first-child{border-top:0}
+  .journey .ch{font-size:11px; font-weight:700; letter-spacing:.06em; color:var(--accent); padding-top:3px}
   .journey time{font-size:11.8px; letter-spacing:.05em; color:var(--muted); padding-top:3px}
   .journey b{display:block; color:var(--fg); font-weight:650; font-size:15.5px; margin-bottom:5px}
   .journey p{margin:0 0 9px; color:var(--muted); font-size:14.5px; line-height:1.62; max-width:56ch}
@@ -210,7 +211,8 @@
     .wrap{padding:0 18px}
     .ladder li{grid-template-columns:2.4rem 1fr; gap:12px}
     .buildlist li{grid-template-columns:1fr; gap:5px}
-    .journey li{grid-template-columns:1fr; gap:6px}
+    .journey li{grid-template-columns:2rem 1fr; gap:4px 10px}
+    .journey .ch{grid-row:span 2}
     .st{display:inline-block; justify-self:start}
   }
 
