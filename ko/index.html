@@ -415,6 +415,40 @@
 </footer>
 
 <script>
+  /* 숫자가 화면에 들어올 때 0에서 목표값까지 올라간다. 동작 줄이기를 켠 사람에게는 바로 최종값. */
+  (function(){
+    var els = Array.prototype.slice.call(document.querySelectorAll(".stat .v"));
+    if(!els.length || !("IntersectionObserver" in window)) return;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    els.forEach(function(el){ el.dataset.final = el.textContent.trim(); });
+    function paint(el, v){
+      var final = el.dataset.final;
+      var suffix = final.indexOf("%") > -1 ? "%" : "";
+      var n = Math.round(v);
+      el.textContent = n.toLocaleString("en-US") + suffix;
+    }
+    function run(el){
+      var final = el.dataset.final;
+      var target = parseFloat(final.replace(/[^0-9.]/g, "")) || 0;
+      if(reduce || !target){ el.textContent = final; return; }
+      var t0 = null, dur = 1100;
+      function step(ts){
+        if(!t0) t0 = ts;
+        var k = Math.min(1, (ts - t0) / dur);
+        var eased = 1 - Math.pow(1 - k, 3);
+        paint(el, target * eased);
+        if(k < 1) requestAnimationFrame(step); else el.textContent = final;
+      }
+      requestAnimationFrame(step);
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ io.unobserve(e.target); run(e.target); }
+      });
+    }, {threshold: .5});
+    els.forEach(function(el){ io.observe(el); });
+  })();
+
   (function(){
     var root=document.documentElement, btn=document.getElementById("themeBtn"), icon=document.getElementById("themeIcon");
     function paint(){ icon.textContent = root.getAttribute("data-theme")==="light" ? "☀" : "☾"; }
