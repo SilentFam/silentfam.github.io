@@ -253,6 +253,9 @@
   .letterbox input:focus{border-color:var(--accent); box-shadow:0 0 0 3px rgba(167,139,250,.14)}
   .letterbox button{padding:11px 18px; font:inherit; font-size:14.5px; font-weight:600; cursor:pointer;
     color:var(--btn-ink); border:0; border-radius:10px; background:linear-gradient(180deg,#bda8ff,#a78bfa)}
+  .letterbox a.btn{padding:11px 18px; font:inherit; font-size:14.5px; font-weight:600; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; justify-content:center;
+    color:var(--btn-ink); border:0; border-radius:10px; background:linear-gradient(180deg,#bda8ff,#a78bfa)}
+  .letterbox a.btn:hover{filter:brightness(1.06)}
 
   footer{border-top:1px solid var(--line); padding:40px 0 64px; margin-top:8px}
   .fgrid{display:flex; flex-wrap:wrap; gap:34px; justify-content:space-between}
@@ -389,7 +392,7 @@
         <b>말할 만한 게 생겼을 때, 한 통.</b>
         <span>추적 없음, 넘겨주기 없음, 정해진 주기 없음.</span>
       </div>
-      <a class="btn" href="#subscribe">구독</a>
+      <a class="btn" href="#subscribe" onclick="var i=document.querySelector('#subscribe input[type=email]'); if(i){i.focus();}">구독</a>
     </div>
   </section>
 
