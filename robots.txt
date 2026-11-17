@@ -1,0 +1,6 @@
+Content-Signal: search=yes, ai-input=no, ai-train=no
+
+User-agent: *
+Allow: /
+
+Sitemap: https://silentfam.com/sitemap.xml
